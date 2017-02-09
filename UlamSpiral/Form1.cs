@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace UlamSpiral
 {
     public partial class Form1 : Form
@@ -15,6 +16,30 @@ namespace UlamSpiral
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var pn = new PrimeNumbers();
+            var result = pn.MakeSieve(Convert.ToInt32(numericUpDown1.Value));
+            var graphics = panel1.CreateGraphics();
+            System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(Color.Black);
+            int panelCenterX = (panel1.Right - panel1.Left) / 2;
+            int panelCenterY = (panel1.Bottom - panel1.Top) / 2;
+            //graphics.FillRectangle(brush, new Rectangle(panelCenterX, panelCenterY, 1,1));
+            
+            for (int x = 0; x<result.Length; x++)
+            {
+                if (result[x])
+                {
+                    var coordinate = pn.CalculatePointByIndex(x);
+                    int xPos = (coordinate.Item1*2);
+                    int yPos = (coordinate.Item2*2);
+
+                    graphics.FillRectangle(brush, new Rectangle(panelCenterX+xPos, panelCenterY+yPos, 2, 2));
+                }
+            }
+          
         }
     }
 }
