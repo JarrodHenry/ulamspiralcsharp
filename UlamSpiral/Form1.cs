@@ -27,6 +27,7 @@ namespace UlamSpiral
             var graphics = panel1.CreateGraphics();
             graphics.Clear(Color.White);
             System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(Color.Black);
+            SolidBrush centerColor = new System.Drawing.SolidBrush(Color.Red);
             int panelCenterX = (panel1.Right - panel1.Left) / 2;
             int panelCenterY = (panel1.Bottom - panel1.Top) / 2;
             //graphics.FillRectangle(brush, new Rectangle(panelCenterX, panelCenterY, 1,1));
@@ -42,6 +43,7 @@ namespace UlamSpiral
                     graphics.FillRectangle(brush, new Rectangle(panelCenterX+xPos, panelCenterY+yPos, scale, scale));
                 }
             }
+            graphics.FillRectangle(centerColor, new Rectangle(panelCenterX, panelCenterY, scale, scale));
           
         }
 
