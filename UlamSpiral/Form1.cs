@@ -20,9 +20,12 @@ namespace UlamSpiral
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+            var scale = Convert.ToInt32(numericUpDown2.Value);
             var pn = new PrimeNumbers();
             var result = pn.MakeSieve(Convert.ToInt32(numericUpDown1.Value));
             var graphics = panel1.CreateGraphics();
+            graphics.Clear(Color.White);
             System.Drawing.SolidBrush brush = new System.Drawing.SolidBrush(Color.Black);
             int panelCenterX = (panel1.Right - panel1.Left) / 2;
             int panelCenterY = (panel1.Bottom - panel1.Top) / 2;
@@ -33,13 +36,15 @@ namespace UlamSpiral
                 if (result[x])
                 {
                     var coordinate = pn.CalculatePointByIndex(x);
-                    int xPos = (coordinate.Item1*2);
-                    int yPos = (coordinate.Item2*2);
+                    int xPos = (coordinate.Item1*scale);
+                    int yPos = (coordinate.Item2*scale);
 
-                    graphics.FillRectangle(brush, new Rectangle(panelCenterX+xPos, panelCenterY+yPos, 2, 2));
+                    graphics.FillRectangle(brush, new Rectangle(panelCenterX+xPos, panelCenterY+yPos, scale, scale));
                 }
             }
           
         }
+
+  
     }
 }
