@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="1024" height="768"></canvas>
+    <script>
+
+      function drawdot(x, y) {
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+      context.beginPath();
+      context.rect(x, y, 2, 2);
+      context.fillStyle = 'black';
+      context.fill();
+      context.lineWidth = 1;
+      context.strokeStyle = 'black';
+      context.stroke();
+    }
+  var is_prime = [];
+    function MakeSieve(max) {
+
+      for (let i=2; i<=max; i++)
+      {
+        is_prime[i]=true;
+      }
+
+      for (let i=2; i<=max; i++)
+      {
+        if (is_prime[i])
+        {
+          for (let j = i * 2; j <= max; j+=i)
+          {
+            is_prime[j] = false;
+          }
+        }
+      }
+      return is_prime;
+    }
+
+    function ReturnCartesian(index) {
+      let m = (Math.floor((Math.sqrt(index) + 1) / 2));
+     let k = index - (4 * m*(m - 1));
+
+     if ((k>=1) && (k < (2*m)))
+       {
+         return ({x: m, y: k-m});
+       }
+       else if ((k >= (2*m) ) && (k<(4*m)))
+       {
+         return ({x: 3*m-k, y: m});
+       }
+       else if ((k >= (4*m)) && (k<(6*m)))
+       {
+         return ({x: -1 * m, y: 5 * m - k});
+       }
+       else if ((k >= (6*m)) &&  (k<(8*m)))
+       {
+         return ({x: k - (7*m), y: -1 * m})
+       }
+    }
+
+    var primes = MakeSieve(100000);
+    for (let num = 2; num < 100000; num++)
+    {
+      //console.log(num);
+        //console.log(ReturnCartesian(num));
+     if (primes[num]===true)
+      {
+        var point = ReturnCartesian(num);
+        drawdot(512+(point.x*2), 384+(point.y*2));
+      }
+   }
+    </script>
+  </body>
+</html>
